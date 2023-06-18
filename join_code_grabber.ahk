@@ -7,9 +7,14 @@
         Send, ^c
         text := Clipboard
 
-        pos := InStr(text, "/join ")
+        ; removing everything before "/join"
+        pos_join := InStr(text, "/join ")
+        text := Substr(text, pos_join)
+        
+        ; removing everything after "#" + 4
+        pos_nbrs := InStr(text, "#")+4
+        text := Substr(text, 1, pos_nbrs)
 
-        text := Substr(text, pos)
         Clipboard := text
 
         WinActivate, Destiny 2
@@ -17,5 +22,8 @@
         Send ^v
         Send, {enter}
     }
+Return
+
+^0::Suspend
 Return
 
